@@ -1,0 +1,27 @@
+<h4>Hi <%=session[:player_name]%>!<h4>
+<div style="margin-bottom:15px">
+	<% if session[:total_amount] != 0  %>
+		<h4>Play again?</h4>
+		<a href='/bet' class="btn">yes</a>
+		<a href='/game_over' class="btn">no</a>
+		
+	<% elsif session[:total_amount] == 0  %>
+	<h4>It looks like you have no money left...</h4>
+		<a href='/' class="btn">Start over</a>
+	<% end %>
+</div>
+<div class="well cards">
+<h3>Dealer's cards:</h3>
+	<% session[:dealer_cards].each do |card| %>
+	<%= card_image(card) %>
+	<%end%>
+</div>
+
+<div class="well cards">
+<h3><%=session[:player_name] %>'s' cards:</h3>
+<% session[:player_cards].each do |card| %>
+	<%= card_image(card) %>
+<%end%>
+</div>
+
+<p>Your value is now <%=session[:player_value]%>. </p>

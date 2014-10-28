@@ -1,0 +1,29 @@
+<div id="game">
+<h4>Hi <%=session[:player_name]%>!<h4>
+
+<div class="well cards">
+<h3>Dealer's cards:</h3>
+	<% session[:dealer_cards].each do |card| %>
+	<%= card_image(card) %>
+<%end%>
+<div style="margin-top:15px">
+	<% if session[:dealer_value] < 17 %>
+	<h4><%=@hit_message %></h4>
+	<form action='/game_dealer_turn' method='post'>
+	<input id="dealer_hit" type='submit' class="btn" value='Click here to see dealers card'>
+	</form>
+<% end %>
+</div>
+</div>
+
+
+
+<div class="well cards">
+<h3><%=session[:player_name] %>'s' cards:</h3>
+<% session[:player_cards].each do |card| %>
+	<%= card_image(card) %>
+<%end%>
+</div>
+
+<p>You stayed at <%= session[:player_value] %>.</p>
+</div>
