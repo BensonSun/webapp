@@ -3,7 +3,10 @@ require 'pry'
 require 'sinatra'
 require "sinatra/reloader" if development?
 
-set :sessions, true
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :path => '/',
+                           :secret => 'your_secret'
+
 
 helpers do
 
