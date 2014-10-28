@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'pry'
 require 'sinatra'
+require "sinatra/reloader" if development?
 
 use Rack::Session::Cookie, :key => 'rack.session',
                            :path => '/',
@@ -140,7 +141,6 @@ post '/bet' do
 end
 
 get '/game' do
-  erb :game
   FACE_VALUE = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
   SUIT = ['hearts', 'diamonds', 'clubs', 'spades']
   deck = SUIT.product(FACE_VALUE).shuffle!
