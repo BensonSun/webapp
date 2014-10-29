@@ -1,26 +1,29 @@
 <div id="game">
-	<h4>Hi <%=session[:player_name]%>!<h4>
-	<div class="well cards">
+	<div class="well cards dealer-cards">
 	<h3>Dealer's cards:</h3>
 
-		<img src="images/cards/cover.jpg">
+		<img class="card" src="images/cards/cover.jpg">
 		<%= card_image(session[:dealer_cards][1]) %>
 
 	</div>
 
-	<div class="well cards">
+	<div class="well cards player-cards">
 	<h3><%=session[:player_name] %>'s' cards:</h3>
 	<% session[:player_cards].each do |card| %>
 		<%= card_image(card) %>
 	<%end%>
 	</div>
-	<p>Your value is now <%=session[:player_value]%>. What do your want to do?</p>
-
-	<form action='/player_hit' method='post'>
+	<h4>Your value is now <%=session[:player_value]%>. What do your want to do?</h4>
+	<div>
+	<div class="field">Total: <%=session[:total_amount] %></div>
+	<div class="field">Bet: <%=session[:bet_amount] %></div>
+	</div>
+	<form style="display:inline-block"action='/player_hit' method='post'>
 		<input id="hit" type ="submit" class="btn btn-success" value="Hit" name="choice">
 	</form>
-	<form action='/player_stay' method='post'>
+	<form style="display:inline-block"action='/player_stay' method='post'>
 		<input id="stay"type ="submit" class="btn btn-warning" value="Stay" name="choice">
 	</form>
-		
+		  
+  
 </div>

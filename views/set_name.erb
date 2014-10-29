@@ -1,7 +1,28 @@
-<h4>Set Player Name</h4>
-<form action='/set_name' method="post">
-  Name: <input type='text' name='player_name'>
-  <br>
-  <input type='submit' class='btn' >
 
-</form>
+<div id="welcome-title">
+	<p><span style="font-size:64px">Welcome to Benson's Casino</span></p>
+	<p><span style="font-size:64px">Let's play <strong>Blackjack!</strong></span></p>
+	<br>
+	<form id="name-form" action='/set_name' method="post">
+  	<input type='text' name='player_name' placeholder="Enter your name here">
+  	<br>
+  	<input type='submit' class='btn' value="submit">
+	</form>
+</div>
+  <%if @error%>
+  	<div id="msg-error"><div class="alert alert-error"><strong>ERROR</strong><br><%=@error%></div></div>
+    <script type="text/javascript">
+    		$('#overlay').fadeIn(500);
+    		$('#msg-error').fadeIn(500);
+    		$('#msg-error,#overlay').click(function(){
+    		$('#msg-error').fadeOut(500);
+    		$('#overlay').fadeOut(500);
+    	});
+    </script>
+  <%end%>
+
+
+
+<div id="photo-credit">
+<p>Photo credit:<a href="https://www.flickr.com/photos/masochismtango/478614736/" target='_blank'>Tom Godber</a></p>
+</div>

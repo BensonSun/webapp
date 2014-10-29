@@ -11,7 +11,7 @@ function player_stay(){
 			type: 'POST',
 			url: '/player_stay'
 		}).done(function(msg){
-			$('#game').replaceWith(msg)
+			$('#game').replaceWith(msg);
 		});
 
 		return false
@@ -26,7 +26,9 @@ function player_hit(){
 			type: 'POST',
 			url: '/player_hit'
 		}).done(function(msg){
-			$('#game').replaceWith(msg)
+			$('#game').replaceWith(msg);
+			$(".player-cards img:last-child").hide()
+    	$(".player-cards img:last-child").fadeIn(1000); 
 		});
 
 		return false
@@ -40,7 +42,9 @@ function dealer_hit(){
 			type: 'POST',
 			url: '/game_dealer_turn'
 		}).done(function(msg){
-			$('#game').replaceWith(msg)
+			$('#game').replaceWith(msg);
+			$(".dealer-cards img:last-child").hide()
+    	$(".dealer-cards img:last-child").fadeIn(1000); 
 		});
 
 		return false

@@ -1,7 +1,7 @@
 <div id="game">
 <h4>Hi <%=session[:player_name]%>!<h4>
 
-<div class="well cards">
+<div class="well cards dealer-cards">
 <h3>Dealer's cards:</h3>
 	<% session[:dealer_cards].each do |card| %>
 	<%= card_image(card) %>
@@ -10,7 +10,7 @@
 	<% if session[:dealer_value] < 17 %>
 	<h4><%=@hit_message %></h4>
 	<form action='/game_dealer_turn' method='post'>
-	<input id="dealer_hit" type='submit' class="btn" value='Click here to see dealers card'>
+	<input id="dealer_hit" type='submit' class="btn btn-dealer-hit" value='Click here to see dealers card'>
 	</form>
 <% end %>
 </div>
@@ -18,12 +18,16 @@
 
 
 
-<div class="well cards">
+<div class="well cards player-cards">
 <h3><%=session[:player_name] %>'s' cards:</h3>
 <% session[:player_cards].each do |card| %>
 	<%= card_image(card) %>
 <%end%>
 </div>
+<div>
+	<div class="field">Total: <%=session[:total_amount] %></div>
+	<div class="field">Bet: <%=session[:bet_amount] %></div>
+</div>
+<h4>You stayed at <%= session[:player_value] %>.</h4>
 
-<p>You stayed at <%= session[:player_value] %>.</p>
 </div>

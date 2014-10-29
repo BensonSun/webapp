@@ -27,12 +27,12 @@ helpers do
   end
 
   def winner!(msg)
-    @success = "<strong>#{session[:player_name]} won!</strong> #{msg}" 
+    @success = "<strong>#{session[:player_name]} won!</strong><br> #{msg}" 
     session[:total_amount] += session[:bet_amount].to_i 
   end
 
   def loser!(msg)
-    @error = "<strong>#{session[:player_name]} lost!</strong> #{msg}"
+    @error = "<strong>#{session[:player_name]} lost!</strong><br> #{msg}"
     session[:total_amount] -= session[:bet_amount].to_i 
   end
 
@@ -43,22 +43,22 @@ helpers do
   def blackjack_or_busted?
     if session[:player_value] > 21
       loser!("It looks like #{session[:player_name]} busted at #{session[:player_value]}!")
-      halt erb :game_finish
+      halt erb :game_finish, layout: false
     elsif session[:player_value] == 21
       winner!("Congratulations! #{session[:player_name]} hit Blackjack!")
       halt erb :game_finish
     elsif session[:dealer_value] > 21
       winner!("Dealer busted at #{session[:dealer_value]}, #{session[:player_name]} won!")
-      halt erb :game_finish
+      halt erb :game_finish, layout: false
     elsif session[:player_value] == 21
       loser!("Dealer hit blackjack.") 
       halt erb :game_finish
     end
 
     if session[:current_player] == "player" 
-      erb :game
+      erb :game, layout: false
     else
-      erb :game_dealer_turn
+      erb :game_dealer_turn, layout: false
     end
   end
 
@@ -71,7 +71,7 @@ helpers do
       tie!("Both #{session[:player_name]} and dealer stayed at #{session[:player_value]}.")
     end
 
-    erb :game_finish
+    erb :game_finish, layout: false
   end
 
 
@@ -86,11 +86,11 @@ helpers do
         when "A" then "ace" 
       end
     end
-    "<img src='images/cards/#{suit}_#{value}.jpg'>"
+    "<img  class='card' src='images/cards/#{suit}_#{value}.jpg'>"
   end
 
   def dealer_play
-    erb :game_dealer_turn
+    erb :game_dealer_turn, layout: false
     session[:dealer_value] = total_value(session[:dealer_cards])
     blackjack_or_busted?
     if session[:dealer_value] < 17
@@ -132,7 +132,7 @@ post '/bet' do
     @error = "You don't have enoung money!"
     halt erb :bet
   elsif session[:bet_amount].to_i == 0
-    @error = "Please enter a valid number"
+    @error = "You must make a bet."
     halt erb :bet
   elsif session[:bet_amount].to_i.class == Fixnum && session[:bet_amount].to_i > 0
     redirect '/game'
@@ -155,6 +155,7 @@ get '/game' do
   session[:player_cards] << session[:deck].pop
   session[:dealer_cards] << session[:deck].pop
   session[:player_value] = total_value(session[:player_cards])
+  erb :game
   blackjack_or_busted?
   erb :game
 end
@@ -177,7 +178,7 @@ post '/player_hit' do
     session[:player_cards] << session[:deck].pop
     session[:player_value] = total_value(session[:player_cards])
     blackjack_or_busted?
-    erb :game
+    erb :game, layout: false
 end
 
 post '/player_stay' do

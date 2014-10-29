@@ -1,27 +1,58 @@
-<h4>Hi <%=session[:player_name]%>!<h4>
-<div style="margin-bottom:15px">
-	<% if session[:total_amount] != 0  %>
-		<h4>Play again?</h4>
-		<a href='/bet' class="btn">yes</a>
-		<a href='/game_over' class="btn">no</a>
-		
-	<% elsif session[:total_amount] == 0  %>
-	<h4>It looks like you have no money left...</h4>
-		<a href='/' class="btn">Start over</a>
-	<% end %>
-</div>
-<div class="well cards">
+<div id='game'>
+<div class="well cards dealer-cards">
 <h3>Dealer's cards:</h3>
 	<% session[:dealer_cards].each do |card| %>
 	<%= card_image(card) %>
 	<%end%>
 </div>
 
-<div class="well cards">
+<div class="well cards player-cards">
 <h3><%=session[:player_name] %>'s' cards:</h3>
 <% session[:player_cards].each do |card| %>
 	<%= card_image(card) %>
 <%end%>
 </div>
 
-<p>Your value is now <%=session[:player_value]%>. </p>
+<h4>Your value is now <%=session[:player_value]%>. </h4>
+  <%if @error%>
+  	<div id="msg-error"><div class="alert alert-error"><%=@error%></div></div>
+    <script type="text/javascript">
+    		$('#overlay').fadeIn(500);
+    		$('#msg-error').fadeIn(500);
+    		$('#msg-error,#overlay').click(function(){
+    		$('#msg-error').fadeOut(500);
+    		$('#overlay').fadeOut(500);
+    	});
+    </script>
+   <%elsif @success%>
+     <div id="msg-success"><div class="alert alert-success"><%=@success%></div></div> 
+   		<script type="text/javascript">
+    		$('#overlay').fadeIn(500);
+    		$('#msg-success').fadeIn(500);
+    		$('#msg-success,#overlay').click(function(){
+    		$('#msg-success').fadeOut(500);
+    		$('#overlay').fadeOut(500);
+    		});
+    </script>
+	<%end%>
+	<div>
+		<div class="field">Total: <%=session[:total_amount] %></div>
+		<div class="field">Bet: <%=session[:bet_amount] %></div>
+	</div>
+<div>
+	<% if session[:total_amount] != 0  %>
+		<form style="display:inline-block"action='/bet' method='get'>
+			<input type ="submit" class="btn btn-success" value="Play again">
+		</form>
+		
+		<form style="display:inline-block"action='/game_over' method='get'>
+			<input type ="submit" class="btn btn-warning" value="See result">
+		</form>
+	<% elsif session[:total_amount] == 0  %>
+	<h4>It looks like you have no money left...</h4>
+		<a href='/' class="btn">Start over</a>
+	<% end %>
+</div>
+
+</div>
+

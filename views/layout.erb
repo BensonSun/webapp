@@ -2,14 +2,15 @@
 <html>
   <head>
     <title>My First App</title>
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css"> -->
     <link rel="stylesheet" href="/application.css">
+    <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/vendor/main.js" type="text/javascript"></script>
   </head>
   <body style="padding-top: 50px;">
 
-    <div class="navbar navbar-fixed-top">
+<!--     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
@@ -17,15 +18,12 @@
             </ul>
         </div>
       </div>
-    </div>
-
+    </div> -->
+  <div id="overlay"></div>
   <div class="container">
-    <%if @error %>
-      <div class="alert alert-error"><%=@error%></div>
-    <%elsif @success %>
-      <div class="alert alert-success"><%=@success%></div>
-    <% end %>
       <%= yield %>
   </div>
+
+
   </body>
 </html>

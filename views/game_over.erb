@@ -1,5 +1,10 @@
-<h4>You've amassed a final amount of $<%=session[:total_amount] %></h4>
-<p>Now that you've honed your blackjack skills, there's nothing left to do except go to Vegas.</p>
-
-
-<a href="/"><div type='btn'>Start over</div></a>
+<div id="game">
+	<div id="final-words">
+		<h1>Here's what you get...</h1>
+		<div class="field">$<%=session[:total_amount] %></div>
+		<h3>Now that you've honed your blackjack skills, there's nothing left to do except go to Vegas.</h3>
+		<form action='/' method='get'>
+			<input type ="submit" class="btn" value="Start over">
+		</form>
+	</div>
+</div>

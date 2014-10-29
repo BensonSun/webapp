@@ -1,8 +1,24 @@
-<h4>Hi <%=session[:player_name]%>!<h4>
-<h3>How much do you want to bet?</h3>
-<p>Now you have: $<%=session[:total_amount]%></p>
-<form action='/bet' method='post'>
-	Amount: <input type="text" name="bet_amount" />
-	<br>
-	<input type="submit" class="btn"/>
-</form>
+<div id="bet-field">
+	<h2 >Hi <%=session[:player_name]%>!</h2>
+	<p><span style="font-size:54px">How much do you want to bet?</span></p>
+	<p>Now you have: $<%=session[:total_amount]%></p>
+	<form action='/bet' method='post'>
+		<input type="text" name="bet_amount" placeholder="make a bet"/>
+		<br>
+		<input type="submit" class="btn" value="submit" >
+	</form>
+	</div>
+	  <%if @error%>
+  	<div id="msg-error"><div class="alert alert-error"><strong>ERROR</strong><br><%=@error%></div></div>'
+    <script type="text/javascript">
+    	$('#overlay').fadeIn(500);
+    	$('#msg-error').fadeIn(500);
+    	$('#msg-error,#overlay').click(function(){
+    		$('#msg-error').fadeOut(500);
+    		$('#overlay').fadeOut(500);
+    	});
+
+    </script>
+	<%end%>
+
+  <div id="overlay"></div>
