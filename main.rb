@@ -114,9 +114,6 @@ post '/set_name' do
   if params[:player_name] == ""
     @error = "Your name cannot be empty!"
     halt erb :set_name
-  elsif params[:player_name][/[a-zA-Z]+/]  != params[:player_name]
-    @error = "Please enter a valid name!"
-    halt erb :set_name
   end
   redirect '/bet'
 end
