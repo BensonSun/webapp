@@ -56,7 +56,7 @@ helpers do
     end
 
     if session[:current_player] == "player" 
-      erb :game, layout: false
+      erb :game
     else
       erb :game_dealer_turn, layout: false
     end
