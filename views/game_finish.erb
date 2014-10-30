@@ -42,14 +42,17 @@
 <div>
 	<% if session[:total_amount] != 0  %>
 		<form style="display:inline-block"action='/bet' method='get'>
-			<input type ="submit" class="btn btn-success" value="Play again">
+			<input type ="submit" class="btn" value="Play again">
 		</form>
-		
+
 		<form style="display:inline-block"action='/game_over' method='get'>
-			<input type ="submit" class="btn btn-warning" value="See result">
+			<input type ="submit" class="btn" value="See result">
 		</form>
 	<% elsif session[:total_amount] == 0  %>
 	<h4>It looks like you have no money left...</h4>
+		<form style="display:inline-block"action='/' method='get'>
+			<input type ="submit" class="btn" value="Start over">
+		</form>
 		<a href='/' class="btn">Start over</a>
 	<% end %>
 </div>

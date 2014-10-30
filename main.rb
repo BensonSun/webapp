@@ -157,7 +157,6 @@ get '/game' do
   session[:player_value] = total_value(session[:player_cards])
   erb :game
   blackjack_or_busted?
-  erb :game
 end
 
 # post '/game' do
